@@ -1,0 +1,43 @@
+<h1>Tarefas</h1>
+
+<table class="table table-striped table-bordered table-hover">
+    <tbody>  
+    <tr>
+            <th>Tarefa</th>
+            <th>Concluída</th>
+            <th class="text-center">
+                <a class="btn btn-xs btn-success" [routerLink]="['/tasks/register']">
+                    Novo
+                </a>
+            </th>
+        </tr>
+    
+        <tr *ngFor="let tarefa of tarefas">
+            <td
+                [class.success]="!tarefa.concluida">
+                {{ tarefa.nome }} 
+            </td>
+            <td style="width: 70px" class="text-center">
+                <input type="checkbox"
+                [checked]="tarefa.concluida"
+                (click)="AlterStatus($event, tarefa)"
+                [value]="tarefa.id"
+                >
+            </td>
+            <td class="text-center" style="width: 200px">
+                <a  [routerLink]="['/tasks/edit', tarefa.id]"
+                 title="Editar" alt="Editar" class="btn btn-xs btn-primary">
+                    Editar 
+                </a>
+                <a href="#" title="Remover" 
+                (click)="Delete($event, tarefa)"
+                alt="Remover" class="btn btn-xs btn-danger" 
+                style="margin-left: 5px;">
+                    Remover
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p *ngIf="tarefas.length==0">Nenhuma tarefa cadastrada.</p>
